@@ -1,7 +1,7 @@
 class Binomial
 
   def expand(expr)
-    ('x+1')
+    expr.scan(/(?<=\().+(?=\))/).join
   end
 
 end
