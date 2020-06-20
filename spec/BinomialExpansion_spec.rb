@@ -18,6 +18,7 @@ describe 'binomial' do
 
     it('should return x^2') do
       expect(binomial.expand('(x)^2')).to eq('x^2')
+      expect(binomial.expand('(x+1)^2')).to eq('x^2+2x+4')
     end
 
   end
