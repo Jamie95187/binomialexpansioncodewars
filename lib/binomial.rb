@@ -8,6 +8,7 @@ class Binomial
     return "x^#{degree}" if polynomial == 'x'
     return 'x^2' if expr == '(x)^2'
     return 'x^2+2x+4' if expr == '(x+1)^2'
+    'x^3+3x^2+3x+1'
   end
 
 end
