@@ -24,6 +24,7 @@ describe 'binomial' do
     it('should return correct expansion after increasing degree by 3') do
       expect(binomial.expand('(x)^3')).to eq('x^3')
       expect(binomial.expand('(x+1)^3')).to eq('x^3+3x^2+3x+1')
+      expect(binomial.expand('(x+2)^3')).to eq('x^3+6x^2+12x+2')
     end
 
   end
