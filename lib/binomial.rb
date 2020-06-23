@@ -12,4 +12,10 @@ class Binomial
     'x^3+6x^2+12x+2'
   end
 
+  def sortCoeff(expr)
+    coeffMap = {}
+    expressions = expr.scan(/(\+*\d*x\^*\d*|-*\d*x\^*\d*)/)
+    puts expressions[1]
+  end
+
 end
