@@ -26,11 +26,11 @@ describe 'binomial' do
       expect(binomial.expand('(x+1)^3')).to eq('x^3+3x^2+3x+1')
       expect(binomial.expand('(x+2)^3')).to eq('x^3+6x^2+12x+8')
       expect(binomial.expand('(x-1)^3')).to eq('x^3-3x^2+3x-1')
-      xpect(binomial.expand('(2x-3)^3')).to eq('8x^3-36x^2+54x-27')
+      expect(binomial.expand('(2x-3)^3')).to eq('8x^3-36x^2+54x-27')
     end
 
-    it('should return correct expansion') do
-      e
+    it('should return correct expansion when using a different variable') do
+      expect(binomial.expand('(5m+3)^4')).to eq('625m^4+1500m^3+1350m^2+540m+81')
     end
 
   end

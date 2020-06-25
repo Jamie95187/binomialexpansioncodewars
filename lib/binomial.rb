@@ -1,6 +1,7 @@
 class Binomial
 
   def expand(expr)
+    var = expr.scan(/[a-z]/).first
     degree = expr.scan(/(?<=\)).+/).join[1]
     polynomial = expr.scan(/(?<=\().+(?=\))/).join
     return '1' if degree == '0'
@@ -11,7 +12,7 @@ class Binomial
     # return 'x^3+3x^2+3x+1'if expr == '(x+1)^3'
     # 'x^3+6x^2+12x+8'
     answer = ""
-    expansion(sort(polynomial), degree.to_i).each do |k, v|
+    expansion(sort(polynomial, var), degree.to_i).each do |k, v|
       if k == 0
         if v >= 1
           answer += "+#{v}"
@@ -20,23 +21,23 @@ class Binomial
         end
       elsif k == 1
         if v == 1
-          answer += "x"
+          answer += "#{var}"
         elsif v == -1
-          answer += "-x"
+          answer += "-#{var}"
         elsif v > 1
-          answer += "+#{v}x"
+          answer += "+#{v}#{var}"
         else
-          answer += "#{v}x"
+          answer += "#{v}#{var}"
         end
       else
         if v == 1
-          answer += "x^#{k}"
+          answer += "#{var}^#{k}"
         elsif v == -1
-          answer += "-x^#{k}"
+          answer += "-#{var}^#{k}"
         elsif v > 1
-          answer += "+#{v}x^#{k}"
+          answer += "+#{v}#{var}^#{k}"
         else
-          answer += "#{v}x^#{k}"
+          answer += "#{v}#{var}^#{k}"
         end
       end
     end
@@ -46,11 +47,11 @@ class Binomial
     answer
   end
 
-  def sort(expr)
+  def sort(expr, var)
     coeffMap = {}
-    expressions = expr.scan(/(\+*\d*x\^*\d*|-*\d*x\^*\d*|\+*\d\Z|-\d\Z)/)
+    expressions = expr.scan(/(\+*\d*#{var}\^*\d*|-*\d*#{var}\^*\d*|\+*\d\Z|-\d\Z)/)
     expressions.each do |exp|
-      if (exp.join.include? 'x')
+      if (exp.join.include? "#{var}")
         coeff = exp.join.scan(/(\A\+*\d*|\A-*\d*)/).join
         degree = exp.join.scan(/(\d*\Z)/).join
         if (degree == "")
