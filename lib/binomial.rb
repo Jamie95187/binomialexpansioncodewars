@@ -5,15 +5,48 @@ class Binomial
     polynomial = expr.scan(/(?<=\().+(?=\))/).join
     return '1' if degree == '0'
     return polynomial if degree == '1'
-    return "x^#{degree}" if polynomial == 'x'
-    return 'x^2' if expr == '(x)^2'
-    return 'x^2+2x+4' if expr == '(x+1)^2'
-    return 'x^3+3x^2+3x+1'if expr == '(x+1)^3'
-    'x^3+6x^2+12x+8'
-    p expansion(sortCoeff(polynomial), degree.to_i)
+    # return "x^#{degree}" if polynomial == 'x'
+    # return 'x^2' if expr == '(x)^2'
+    # return 'x^2+2x+4' if expr == '(x+1)^2'
+    # return 'x^3+3x^2+3x+1'if expr == '(x+1)^3'
+    # 'x^3+6x^2+12x+8'
+    answer = ""
+    expansion(sort(polynomial), degree.to_i).each do |k, v|
+      if k == 0
+        if v >= 1
+          answer += "+#{v}"
+        else
+          answer += "#{v}"
+        end
+      elsif k == 1
+        if v == 1
+          answer += "x"
+        elsif v == -1
+          answer += "-x"
+        elsif v > 1
+          answer += "+#{v}x"
+        else
+          answer += "#{v}x"
+        end
+      else
+        if v == 1
+          answer += "x^#{k}"
+        elsif v == -1
+          answer += "-x^#{k}"
+        elsif v > 1
+          answer += "+#{v}x^#{k}"
+        else
+          answer += "#{v}x^#{k}"
+        end
+      end
+    end
+    if answer[0] == '+'
+      answer = answer[1, answer.length - 1]
+    end
+    answer
   end
 
-  def sortCoeff(expr)
+  def sort(expr)
     coeffMap = {}
     expressions = expr.scan(/(\+*\d*x\^*\d*|-*\d*x\^*\d*|\+*\d\Z|-\d\Z)/)
     expressions.each do |exp|

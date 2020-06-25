@@ -18,7 +18,7 @@ describe 'binomial' do
 
     it('should return correct expansion after increasing degree by 2') do
       expect(binomial.expand('(x)^2')).to eq('x^2')
-      expect(binomial.expand('(x+1)^2')).to eq('x^2+2x+4')
+      expect(binomial.expand('(x+2)^2')).to eq('x^2+4x+4')
     end
 
     it('should return correct expansion after increasing degree by 3') do
