@@ -9,7 +9,7 @@ class Binomial
     return 'x^2' if expr == '(x)^2'
     return 'x^2+2x+4' if expr == '(x+1)^2'
     return 'x^3+3x^2+3x+1'if expr == '(x+1)^3'
-    'x^3+6x^2+12x+2'
+    'x^3+6x^2+12x+8'
     p expansion(sortCoeff(polynomial), degree.to_i)
   end
 
@@ -41,19 +41,23 @@ class Binomial
   end
 
   def expansion(coeffMap, degree)
-    answ = {}
     newCoeffMap = coeffMap
-    for i in 1..degree
-      newCoeffMap.each_key do |deg1|
+    for i in 1...degree
+      answ = {}
+      newCoeffMap.dup.each_key do |deg1|
+        # puts "deg: #{deg1} -- coeff: #{newCoeffMap[deg1]}"
         coeffMap.each_key do |deg2|
-          if (answ.key? (deg1 + deg2))
-            answ[deg1 + deg2] += newCoeffMap[deg1]  * coeffMap[deg2]
+          if (answ.has_key? deg1+deg2)
+            # puts "#{deg1+deg2} += #{newCoeffMap[deg1]}x#{coeffMap[deg2]}"
+            answ[deg1 + deg2] += newCoeffMap[deg1]*coeffMap[deg2]
           else
-            answ[deg1 + deg2] = newCoeffMap[deg1] * coeffMap[deg2]
+            # puts "#{deg1+deg2} = #{newCoeffMap[deg1]}x#{coeffMap[deg2]}"
+            answ[deg1 + deg2] = newCoeffMap[deg1]*coeffMap[deg2]
           end
         end
-        newCoeffMap = answ
       end
+      # puts " ------------------------------- "
+      newCoeffMap = answ
     end
     answ
   end
