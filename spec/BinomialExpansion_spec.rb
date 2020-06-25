@@ -33,6 +33,9 @@ describe 'binomial' do
       expect(binomial.expand('(5m+3)^4')).to eq('625m^4+1500m^3+1350m^2+540m+81')
     end
 
+    it('should return correct expansion when first coeff is negative') do
+      expect(binomial.expand('(-5m+3)^4')).to eq('625m^4-1500m^3+1350m^2-540m+81')
+    end
   end
 
 end

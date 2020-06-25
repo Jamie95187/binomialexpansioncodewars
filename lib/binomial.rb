@@ -12,6 +12,7 @@ class Binomial
     # return 'x^3+3x^2+3x+1'if expr == '(x+1)^3'
     # 'x^3+6x^2+12x+8'
     answer = ""
+    # puts expansion(sort(polynomial, var), degree.to_i)
     expansion(sort(polynomial, var), degree.to_i).each do |k, v|
       if k == 0
         if v >= 1
@@ -50,14 +51,19 @@ class Binomial
   def sort(expr, var)
     coeffMap = {}
     expressions = expr.scan(/(\+*\d*#{var}\^*\d*|-*\d*#{var}\^*\d*|\+*\d\Z|-\d\Z)/)
+    # p expressions
     expressions.each do |exp|
+      # puts "exp ---- #{exp}"
       if (exp.join.include? "#{var}")
-        coeff = exp.join.scan(/(\A\+*\d*|\A-*\d*)/).join
+        coeff = exp.join.scan(/(\A-\d*|\A\+*\d*)/).join
+        # puts "Coeff ----- #{exp.join}"
+        # puts "Coeff ----- #{coeff}"
         degree = exp.join.scan(/(\d*\Z)/).join
         if (degree == "")
           if (coeff == "")
             coeffMap[1] = 1
           else
+            puts "Coeff ----- #{coeff}"
             coeffMap[1] = coeff.to_i
           end
         else
