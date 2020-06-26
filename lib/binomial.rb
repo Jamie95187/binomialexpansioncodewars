@@ -6,11 +6,6 @@ class Binomial
     polynomial = expr.scan(/(?<=\().+(?=\))/).join
     return '1' if degree == '0'
     return polynomial if degree == '1'
-    # return "x^#{degree}" if polynomial == 'x'
-    # return 'x^2' if expr == '(x)^2'
-    # return 'x^2+2x+4' if expr == '(x+1)^2'
-    # return 'x^3+3x^2+3x+1'if expr == '(x+1)^3'
-    # 'x^3+6x^2+12x+8'
     answer = ""
     # puts expansion(sort(polynomial, var), degree.to_i)
     expansion(sort(polynomial, var), degree.to_i).each do |k, v|
@@ -63,7 +58,7 @@ class Binomial
           if (coeff == "")
             coeffMap[1] = 1
           else
-            puts "Coeff ----- #{coeff}"
+            # puts "Coeff ----- #{coeff}"
             coeffMap[1] = coeff.to_i
           end
         else

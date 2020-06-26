@@ -37,6 +37,10 @@ describe 'binomial' do
       expect(binomial.expand('(-5m+3)^4')).to eq('625m^4-1500m^3+1350m^2-540m+81')
       expect(binomial.expand('(-2k-3)^3')).to eq('-8k^3-36k^2-54k-27')
     end
+
+    it('should return correct expansion after increasing by large degree') do
+      expect(binomial.expand('(y+5)^15')).to eq('y^15+75y^14+2625y^13+56875y^12+853125y^11+9384375y^10+78203125y^9+502734375y^8+2513671875y^7+9775390625y^6+29326171875y^5+66650390625y^4+111083984375y^3+128173828125y^2+91552734375y+30517578125')
+    end
   end
 
 end
